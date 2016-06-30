@@ -1,0 +1,50 @@
+#### convergence ecm
+
+### load ECM Family data
+
+#ecm.fam<-read.csv('~/Desktop/Thesis/R/Fungal_rarefaction/rare_ecm_family.csv')
+ecm.fam<-data.frame(ecm.fam)
+ecm.fam<-ecm.fam[-c(24,27,29,33,47,48,50,53,54,55,64,66,67,69,74,75,85,87,89,91,95,96,98,100),]
+Taxon<-ecm.fam$Taxon
+Intensity<-ecm.fam$Intensity
+landuse<-ecm.fam$landuse
+city<-ecm.fam$city
+Richness.fam<-ecm.fam$Richness.fam
+Richness.OTU<-ecm.fam$Richness.otu
+factors<-data.frame(Taxon, Intensity, landuse, city, Richness.fam, Richness.OTU)
+
+ecm.fam<-ecm.fam[,-c(1,2,3,4,5,6)]
+
+
+### Conduct Permanova
+
+
+### first with strata; this treats city as a blocking factor
+nested_permanova<-adonis(ecm.fam~landuse, factors, permutation=999, method="bray", strata=city)
+
+
+### next without; this treats landuse as nested in city, with an interaction
+
+permanova<-adonis(ecm.fam~landuse+city+landuse*city, factors, permutation=999, method="bray", strata=NULL)
+
+
+### convergence
+
+dist<-vegdist(ecm.fam, method="bray", binary=FALSE, diag=FALSE, upper=FALSE, na.rm=FALSE)
+
+ecm.conv.use<-betadisper(dist, landuse, type=c("median"))
+ecm.conv.int<-betadisper(dist, Intensity, type=c("median"))
+
+anova(ecm.conv.use)
+ecm.conv.use
+
+anova(ecm.conv.int)
+ecm.conv.int
+
+### richness
+
+r.fam<-aov(Richness.fam~landuse+city+landuse*city, factors)
+summary(r.fam)
+
+r.otu<-aov(Richness.OTU~landuse+city+landuse*city, factors)
+summary(r.otu)
