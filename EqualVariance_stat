@@ -1,0 +1,911 @@
+# First, multivariate version of Levene's test
+# all communities: bacteria, fungi and archaea
+# at city-scale, and global levels
+# across taxonomic resolution from OTU to Phylum
+
+
+# Generic:
+Data=read.csv(‘FILEPATH/TO/DATAFILE.csv’)
+Dist= vegdist(Data, method="bray", binary=FALSE, diag=FALSE, upper=FALSE, na.rm=FALSE)
+Sup_Data=read.csv(‘FILEPATH/TO/SupplementaryDataFILE.csv’)
+attach(Sup_Data) ### defines vectors of grouping variables into GroupX, GroupY etc. depending on vectors GroupX etc. ###
+var=betadisper(Dist, GroupX, type=c("median"))
+anova(var)
+var
+
+
+#Archaeal Community:
+
+
+#ArchaealCommunity_Phylum=read.csv('Desktop/Thesis/R/BetaDiversityAnalysis_073115/PCOA/Archaea/Archaea_CommunityData_Phylum_101915.csv')
+ArchaealCommunity_Phylum=read.csv('~/Archaea_CommunityData_Phylum_101915.csv')
+
+
+ArchaeaPhylum_DistanceMatrix=vegdist(ArchaealCommunity_Phylum, method="bray", binary=FALSE, diag=FALSE, upper=FALSE, na.rm=FALSE)
+
+#Sup_Data=read.csv('Desktop/Thesis/R/BetaDiversityAnalysis_073115/PCOA/SecondMatrix.csv')
+
+attach(Sup_Data)
+GroupA=BLK2
+GroupB=BLK
+GroupC=TRT
+
+ArchaeaPhylum_modA=betadisper(ArchaeaPhylum_DistanceMatrix, GroupA, type=c("median"))
+ArchaeaPhylum_modB=betadisper(ArchaeaPhylum_DistanceMatrix, GroupB, type=c("median"))
+ArchaeaPhylum_modC=betadisper(ArchaeaPhylum_DistanceMatrix, GroupC, type=c("median"))
+
+anova(ArchaeaPhylum_modA)
+anova(ArchaeaPhylum_modB)
+anova(ArchaeaPhylum_modC)
+
+permutest(ArchaeaPhylum_modA)
+permutest(ArchaeaPhylum_modB)
+permutest(ArchaeaPhylum_modC)
+
+ArchaeaPhylum_modA
+ArchaeaPhylum_modB
+ArchaeaPhylum_modC
+
+#####CLASS######
+
+#ArchaeaCommunity_Class=read.csv('Desktop/Thesis/R/BetaDiversityAnalysis_073115/PCOA/Archaea/Archaea_CommunityData_Class_101915.csv')
+ArchaeaCommunity_Class=read.csv('~/Archaea_CommunityData_Class_101915.csv')
+
+
+ArchaeaClass_DistanceMatrix=vegdist(ArchaeaCommunity_Class, method="bray", binary=FALSE, diag=FALSE, upper=FALSE, na.rm=FALSE)
+
+ArchaeaClass_modA=betadisper(ArchaeaClass_DistanceMatrix, GroupA, type=c("median"))
+ArchaeaClass_modB=betadisper(ArchaeaClass_DistanceMatrix, GroupB, type=c("median"))
+ArchaeaClass_modC=betadisper(ArchaeaClass_DistanceMatrix, GroupC, type=c("median"))
+
+anova(ArchaeaClass_modA)
+anova(ArchaeaClass_modB)
+anova(ArchaeaClass_modC)
+
+permutest(ArchaeaClass_modA)
+permutest(ArchaeaClass_modB)
+permutest(ArchaeaClass_modC)
+
+ArchaeaClass_modA
+ArchaeaClass_modB
+ArchaeaClass_modC
+
+
+#####ORDER######
+
+
+
+#ArchaeaCommunity_Order=read.csv('Desktop/Thesis/R/BetaDiversityAnalysis_073115/PCOA/Archaea/Archaea_CommunityData_Order_101915.csv')
+ArchaeaCommunity_Order=read.csv('~/Archaea_CommunityData_Order_101915.csv')
+
+
+ArchaeaOrder_DistanceMatrix=vegdist(ArchaeaCommunity_Order, method="bray", binary=FALSE, diag=FALSE, upper=FALSE, na.rm=FALSE)
+
+ArchaeaOrder_modA=betadisper(ArchaeaOrder_DistanceMatrix, GroupA, type=c("median"))
+ArchaeaOrder_modB=betadisper(ArchaeaOrder_DistanceMatrix, GroupB, type=c("median"))
+ArchaeaOrder_modC=betadisper(ArchaeaOrder_DistanceMatrix, GroupC, type=c("median"))
+
+anova(ArchaeaOrder_modA)
+anova(ArchaeaOrder_modB)
+anova(ArchaeaOrder_modC)
+
+permutest(ArchaeaOrder_modA)
+permutest(ArchaeaOrder_modB)
+permutest(ArchaeaOrder_modC)
+
+ArchaeaOrder_modA
+ArchaeaOrder_modB
+ArchaeaOrder_modC
+
+
+#####FAMILY#####
+
+
+
+
+#ArchaeaCommunity_Family=read.csv('Desktop/Thesis/R/BetaDiversityAnalysis_073115/PCOA/Archaea/Archaea_CommunityData_Family_101915.csv')
+ArchaeaCommunity_Family=read.csv('~/Archaea_CommunityData_Family_101915.csv')
+
+
+ArchaeaFamily_DistanceMatrix=vegdist(ArchaeaCommunity_Family, method="bray", binary=FALSE, diag=FALSE, upper=FALSE, na.rm=FALSE)
+
+ArchaeaFamily_modA=betadisper(ArchaeaFamily_DistanceMatrix, GroupA, type=c("median"))
+ArchaeaFamily_modB=betadisper(ArchaeaFamily_DistanceMatrix, GroupB, type=c("median"))
+ArchaeaFamily_modC=betadisper(ArchaeaFamily_DistanceMatrix, GroupC, type=c("median"))
+
+anova(ArchaeaFamily_modA)
+anova(ArchaeaFamily_modB)
+anova(ArchaeaFamily_modC)
+
+permutest(ArchaeaFamily_modA)
+permutest(ArchaeaFamily_modB)
+permutest(ArchaeaFamily_modC)
+
+ArchaeaFamily_modA
+ArchaeaFamily_modB
+ArchaeaFamily_modC
+
+
+#########GENUS#######
+
+
+
+#ArchaeaCommunity_Genus=read.csv('Desktop/Thesis/R/BetaDiversityAnalysis_073115/PCOA/Archaea/Archaea_CommunityData_Genus_073115.csv')
+ArchaeaCommunity_Genus=read.csv('~/Archaea_CommunityData_Genus_073115.csv')
+
+
+ArchaeaGenus_DistanceMatrix=vegdist(ArchaeaCommunity_Genus, method="bray", binary=FALSE, diag=FALSE, upper=FALSE, na.rm=FALSE)
+
+ArchaeaGenus_modA=betadisper(ArchaeaGenus_DistanceMatrix, GroupA, type=c("median"))
+ArchaeaGenus_modB=betadisper(ArchaeaGenus_DistanceMatrix, GroupB, type=c("median"))
+ArchaeaGenus_modC=betadisper(ArchaeaGenus_DistanceMatrix, GroupC, type=c("median"))
+
+anova(ArchaeaGenus_modA)
+anova(ArchaeaGenus_modB)
+anova(ArchaeaGenus_modC)
+
+permutest(ArchaeaGenus_modA)
+permutest(ArchaeaGenus_modB)
+permutest(ArchaeaGenus_modC)
+
+ArchaeaGenus_modA
+ArchaeaGenus_modB
+ArchaeaGenus_modC
+
+
+
+############Archaea OTU#########
+
+
+#ArchaeaOTU=read.csv('Desktop/Thesis/R/AlphaDiversity/ArchaeaOTUtable.csv')
+ArchaeaOTU=read.csv('~/ArchaeaOTUtable.csv')
+
+ArchaeaOTU_DistanceMatrix=vegdist(ArchaeaOTU, method="bray", binary=FALSE, diag=FALSE, upper=FALSE, na.rm=FALSE)
+
+ArchaeaOTU_modA=betadisper(ArchaeaOTU_DistanceMatrix, GroupA, type=c("median"))
+ArchaeaOTU_modB=betadisper(ArchaeaOTU_DistanceMatrix, GroupB, type=c("median"))
+ArchaeaOTU_modC=betadisper(ArchaeaOTU_DistanceMatrix, GroupC, type=c("median"))
+
+anova(ArchaeaOTU_modA)
+anova(ArchaeaOTU_modB)
+anova(ArchaeaOTU_modC)
+
+permutest(ArchaeaOTU_modA)
+permutest(ArchaeaOTU_modB)
+permutest(ArchaeaOTU_modC)
+
+ArchaeaOTU_modA
+ArchaeaOTU_modB
+ArchaeaOTU_modC
+
+#################################################
+
+Treatment by City
+
+#####################################################
+
+Baltimore
+
+#Archaea_Baltimore=read.csv('Desktop/Thesis/R/BetaDiversityAnalysis_073115/PCOA/Archaea/Archaea_PCOA_Genus_Baltimore.csv')
+
+ArchaeaBaltimore_DistanceMatrix=vegdist(Archaea_Baltimore, method="bray", binary=FALSE, diag=FALSE, upper=FALSE, na.rm=FALSE)
+
+Sup_DataBaltimore=read.csv('Desktop/Thesis/R/BetaDiversityAnalysis_073115/PCOA/Second_Baltimore.csv')
+
+
+GroupC=TRT
+
+ArchaeaBaltimore_modC=betadisper(ArchaeaBaltimore_DistanceMatrix, GroupC, type=c("median"))
+
+anova(ArchaeaBaltimore_modC)
+
+permutest(ArchaeaBaltimore_modC)
+
+ArchaeaBaltimore_modC
+
+###############BY CITY#################
+#####Baltimore#######
+
+#Archaea_Baltimore=read.csv('Desktop/Thesis/R/BetaDiversityAnalysis_073115/PCOA/Archaea/Archaea_PCOA_Genus_Baltimore.csv')
+Archaea_Baltimore=read.csv('~/Archaea_PCOA_Genus_Baltimore.csv')
+
+
+ArchaeaBaltimore_DistanceMatrix=vegdist(Archaea_Baltimore, method="bray", binary=FALSE, diag=FALSE, upper=FALSE, na.rm=FALSE)
+
+Sup_DataBaltimore=read.csv('Desktop/Thesis/R/BetaDiversityAnalysis_073115/PCOA/Second_Baltimore.csv')
+attach(Sup_DataBaltimore)
+
+GroupC=TRT
+
+ArchaeaBaltimore_modC=betadisper(ArchaeaBaltimore_DistanceMatrix, GroupC, type=c("median"))
+
+anova(ArchaeaBaltimore_modC)
+
+permutest(ArchaeaBaltimore_modC)
+
+ArchaeaBaltimore_modC
+
+
+#####helsinki##########
+#Archaea_Helsinki=read.csv('Desktop/Thesis/R/BetaDiversityAnalysis_073115/PCOA/Archaea/Archaea_PCOA_Genus_Helsinki.csv')
+Archaea_Helsinki=read.csv('~/Archaea_PCOA_Genus_Helsinki.csv')
+
+
+ArchaeaHelsinki_DistanceMatrix=vegdist(Archaea_Helsinki, method="bray", binary=FALSE, diag=FALSE, upper=FALSE, na.rm=FALSE)
+
+Sup_DataHelsinki=read.csv('Desktop/Thesis/R/BetaDiversityAnalysis_073115/PCOA/Second_Helsinki.csv')
+attach(Sup_DataHelsinki)
+
+GroupC=TRT
+
+ArchaeaHelsinki_modC=betadisper(ArchaeaHelsinki_DistanceMatrix, GroupC, type=c("median"))
+
+anova(ArchaeaHelsinki_modC)
+
+permutest(ArchaeaHelsinki_modC)
+
+ArchaeaHelsinki_modC
+
+####Lahti#####
+#Archaea_Lahti=read.csv('Desktop/Thesis/R/BetaDiversityAnalysis_073115/PCOA/Archaea/Archaea_PCOA_Genus_Lahti.csv')
+Archaea_Lahti=read.csv('~/Archaea_PCOA_Genus_Lahti.csv')
+
+
+ArchaeaLahti_DistanceMatrix=vegdist(Archaea_Lahti, method="bray", binary=FALSE, diag=FALSE, upper=FALSE, na.rm=FALSE)
+
+Sup_DataLahti=read.csv('Desktop/Thesis/R/BetaDiversityAnalysis_073115/PCOA/Second_Lahti.csv')
+attach(Sup_DataLahti)
+
+GroupC=TRT
+
+ArchaeaLahti_modC=betadisper(ArchaeaLahti_DistanceMatrix, GroupC, type=c("median"))
+
+anova(ArchaeaLahti_modC)
+
+permutest(ArchaeaLahti_modC)
+
+ArchaeaLahti_modC
+
+####Budapest####
+#Archaea_Budapest=read.csv('Desktop/Thesis/R/BetaDiversityAnalysis_073115/PCOA/Archaea/Archaea_PCOA_Genus_Budapest.csv')
+Archaea_Budapest=read.csv('~/Archaea_PCOA_Genus_Budapest.csv')
+
+
+ArchaeaBudapest_DistanceMatrix=vegdist(Archaea_Budapest, method="bray", binary=FALSE, diag=FALSE, upper=FALSE, na.rm=FALSE)
+
+Sup_DataBudapest=read.csv('Desktop/Thesis/R/BetaDiversityAnalysis_073115/PCOA/Second_Budapest.csv')
+attach(Sup_DataBudapest)
+
+GroupC=TRT
+
+ArchaeaBudapest_modC=betadisper(ArchaeaBudapest_DistanceMatrix, GroupC, type=c("median"))
+
+anova(ArchaeaBudapest_modC)
+
+permutest(ArchaeaBudapest_modC)
+
+ArchaeaBudapest_modC
+
+####Potchefstroom#####
+
+#Archaea_Potchefstroom=read.csv('Desktop/Thesis/R/BetaDiversityAnalysis_073115/PCOA/Archaea/Archaea_PCOA_Genus_Potchefstroom.csv')
+Archaea_Potchefstroom=read.csv('~/Archaea_PCOA_Genus_Potchefstroom.csv')
+
+
+ArchaeaPotchefstroom_DistanceMatrix=vegdist(Archaea_Potchefstroom, method="bray", binary=FALSE, diag=FALSE, upper=FALSE, na.rm=FALSE)
+
+Sup_DataPotchefstroom=read.csv('Desktop/Thesis/R/BetaDiversityAnalysis_073115/PCOA/Second_Potchefstroom.csv')
+attach(Sup_DataPotchefstroom)
+
+GroupC=TRT
+
+ArchaeaPotchefstroom_modC=betadisper(ArchaeaPotchefstroom_DistanceMatrix, GroupC, type=c("median"))
+
+anova(ArchaeaPotchefstroom_modC)
+
+permutest(ArchaeaPotchefstroom_modC)
+
+ArchaeaPotchefstroom_modC
+
+
+###Bacteria:
+
+
+#BacterialCommunity_Phylum=read.csv('/Volumes/Seagate/R/BetaDiversityAnalysis_073115/PCOA/Bacteria_CommunityData_Phylum.csv')
+BacterialCommunity_Phylum=read.csv('~/Bacteria_CommunityData_Phylum.csv')
+
+BacteriaPhylum_DistanceMatrix=vegdist(BacterialCommunity_Phylum, method="bray", binary=FALSE, diag=FALSE, upper=FALSE, na.rm=FALSE)
+
+Sup_Data=read.csv('Desktop/Thesis/R/BetaDiversityAnalysis_073115/PCOA/SecondMatrix.csv')
+
+attach(Sup_Data)
+GroupA=BLK2
+GroupB=BLK
+GroupC=TRT
+
+BacteriaPhylum_modA=betadisper(BacteriaPhylum_DistanceMatrix, GroupA, type=c("median"))
+BacteriaPhylum_modB=betadisper(BacteriaPhylum_DistanceMatrix, GroupB, type=c("median"))
+BacteriaPhylum_modC=betadisper(BacteriaPhylum_DistanceMatrix, GroupC, type=c("median"))
+
+anova(BacteriaPhylum_modA)
+anova(BacteriaPhylum_modB)
+anova(BacteriaPhylum_modC)
+
+permutest(BacteriaPhylum_modA)
+permutest(BacteriaPhylum_modB)
+permutest(BacteriaPhylum_modC)
+
+BacteriaPhylum_modA
+BacteriaPhylum_modB
+BacteriaPhylum_modC
+
+#####CLASS######
+
+#BacterialCommunity_Class=read.csv('/Volumes/Seagate/R/BetaDiversityAnalysis_073115/PCOA/Bacteria_CommunityData_Class.csv')
+BacterialCommunity_Class=read.csv('~/Bacteria_CommunityData_Class.csv')
+
+
+BacteriaClass_DistanceMatrix=vegdist(BacterialCommunity_Class, method="bray", binary=FALSE, diag=FALSE, upper=FALSE, na.rm=FALSE)
+
+BacteriaClass_modA=betadisper(BacteriaClass_DistanceMatrix, GroupA, type=c("median"))
+BacteriaClass_modB=betadisper(BacteriaClass_DistanceMatrix, GroupB, type=c("median"))
+BacteriaClass_modC=betadisper(BacteriaClass_DistanceMatrix, GroupC, type=c("median"))
+
+anova(BacteriaClass_modA)
+anova(BacteriaClass_modB)
+anova(BacteriaClass_modC)
+
+permutest(BacteriaClass_modA)
+permutest(BacteriaClass_modB)
+permutest(BacteriaClass_modC)
+
+BacteriaClass_modA
+BacteriaClass_modB
+BacteriaClass_modC
+
+
+#####ORDER######
+
+
+
+#BacterialCommunity_Order=read.csv('/Volumes/Seagate/R/BetaDiversityAnalysis_073115/PCOA/Bacteria_CommunityData_Order.csv')
+BacterialCommunity_Order=read.csv('~/Bacteria_CommunityData_Order.csv')
+
+
+BacteriaOrder_DistanceMatrix=vegdist(BacterialCommunity_Order, method="bray", binary=FALSE, diag=FALSE, upper=FALSE, na.rm=FALSE)
+
+BacteriaOrder_modA=betadisper(BacteriaOrder_DistanceMatrix, GroupA, type=c("median"))
+BacteriaOrder_modB=betadisper(BacteriaOrder_DistanceMatrix, GroupB, type=c("median"))
+BacteriaOrder_modC=betadisper(BacteriaOrder_DistanceMatrix, GroupC, type=c("median"))
+
+anova(BacteriaOrder_modA)
+anova(BacteriaOrder_modB)
+anova(BacteriaOrder_modC)
+
+permutest(BacteriaOrder_modA)
+permutest(BacteriaOrder_modB)
+permutest(BacteriaOrder_modC)
+
+BacteriaOrder_modA
+BacteriaOrder_modB
+BacteriaOrder_modC
+
+
+#####FAMILY#####
+
+
+
+
+#BacterialCommunity_Family=read.csv('/Volumes/Seagate/R/BetaDiversityAnalysis_073115/PCOA/Bacteria_CommunityData_Family.csv')
+BacterialCommunity_Family=read.csv('~/Bacteria_CommunityData_Family.csv')
+
+
+BacteriaFamily_DistanceMatrix=vegdist(BacterialCommunity_Family, method="bray", binary=FALSE, diag=FALSE, upper=FALSE, na.rm=FALSE)
+
+BacteriaFamily_modA=betadisper(BacteriaFamily_DistanceMatrix, GroupA, type=c("median"))
+BacteriaFamily_modB=betadisper(BacteriaFamily_DistanceMatrix, GroupB, type=c("median"))
+BacteriaFamily_modC=betadisper(BacteriaFamily_DistanceMatrix, GroupC, type=c("median"))
+
+anova(BacteriaFamily_modA)
+anova(BacteriaFamily_modB)
+anova(BacteriaFamily_modC)
+
+permutest(BacteriaFamily_modA)
+permutest(BacteriaFamily_modB)
+permutest(BacteriaFamily_modC)
+
+BacteriaFamily_modA
+BacteriaFamily_modB
+BacteriaFamily_modC
+
+
+#########GENUS#######
+
+
+
+#BacterialCommunity_Genus=read.csv('/Volumes/Seagate/R/BetaDiversityAnalysis_073115/PCOA/Bacteria_CommunityData_Genus_073115.csv')
+BacterialCommunity_Genus=read.csv('~/Bacteria_CommunityData_Genus_073115.csv')
+
+
+BacteriaGenus_DistanceMatrix=vegdist(BacterialCommunity_Genus, method="bray", binary=FALSE, diag=FALSE, upper=FALSE, na.rm=FALSE)
+
+BacteriaGenus_modA=betadisper(BacteriaGenus_DistanceMatrix, GroupA, type=c("median"))
+BacteriaGenus_modB=betadisper(BacteriaGenus_DistanceMatrix, GroupB, type=c("median"))
+BacteriaGenus_modC=betadisper(BacteriaGenus_DistanceMatrix, GroupC, type=c("median"))
+
+anova(BacteriaGenus_modA)
+anova(BacteriaGenus_modB)
+anova(BacteriaGenus_modC)
+
+permutest(BacteriaGenus_modA)
+permutest(BacteriaGenus_modB)
+permutest(BacteriaGenus_modC)
+
+BacteriaGenus_modA
+BacteriaGenus_modB
+BacteriaGenus_modC
+
+
+
+############Bacteria OTU#########
+
+
+read.tcsv = function(file, header=TRUE, sep=",", ...) {
+ 
+   n = max(count.fields(file, sep=","), na.rm=TRUE)
+   x = readLines(file)
+ 
+   .splitvar = function(x, sep, n) {
+     var = unlist(strsplit(x, split=sep))
+     length(var) = n
+     return(var)
+   }
+ 
+   x = do.call(cbind, lapply(x, .splitvar, sep=sep, n=n))
+   x = apply(x, 1, paste, collapse=sep) 
+   out = read.csv(text=x, sep=sep, header=header, ...)
+   return(out)
+ 
+ }
+#bacteria_OTU=read.tcsv('Desktop/Thesis/R/AlphaDiversity/Bacteria_OTU.csv')
+bacteria_OTU=read.tcsv('~/Bacteria_OTU.csv')
+
+
+
+BacteriaOTU_DistanceMatrix=vegdist(bacteria_OTU, method="bray", binary=FALSE, diag=FALSE, upper=FALSE, na.rm=FALSE)
+
+BacteriaOTU_modA=betadisper(BacteriaOTU_DistanceMatrix, GroupA, type=c("median"))
+BacteriaOTU_modB=betadisper(BacteriaOTU_DistanceMatrix, GroupB, type=c("median"))
+BacteriaOTU_modC=betadisper(BacteriaOTU_DistanceMatrix, GroupC, type=c("median"))
+
+anova(BacteriaOTU_modA)
+anova(BacteriaOTU_modB)
+anova(BacteriaOTU_modC)
+
+permutest(BacteriaOTU_modA)
+permutest(BacteriaOTU_modB)
+permutest(BacteriaOTU_modC)
+
+BacteriaOTU_modA
+BacteriaOTU_modB
+BacteriaOTU_modC
+
+###############BY CITY#################
+#####Baltimore#######
+
+#Bacteria_Baltimore=read.csv('Desktop/Thesis/R/BetaDiversityAnalysis_073115/PCOA/Bacteria/Bacteria_PCOA_Genus_Baltimore.csv')
+Bacteria_Baltimore=read.csv('~/Bacteria/Bacteria_PCOA_Genus_Baltimore.csv')
+
+
+BacteriaBaltimore_DistanceMatrix=vegdist(Bacteria_Baltimore, method="bray", binary=FALSE, diag=FALSE, upper=FALSE, na.rm=FALSE)
+
+Sup_DataBaltimore=read.csv('Desktop/Thesis/R/BetaDiversityAnalysis_073115/PCOA/Second_Baltimore.csv')
+attach(Sup_DataBaltimore)
+
+GroupC=TRT
+
+BacteriaBaltimore_modC=betadisper(BacteriaBaltimore_DistanceMatrix, GroupC, type=c("median"))
+
+anova(BacteriaBaltimore_modC)
+
+permutest(BacteriaBaltimore_modC)
+
+BacteriaBaltimore_modC
+
+
+#####helsinki##########
+#Bacteria_Helsinki=read.csv('Desktop/Thesis/R/BetaDiversityAnalysis_073115/PCOA/Bacteria/Bacteria_PCOA_Genus_Helsinki.csv')
+Bacteria_Helsinki=read.csv('~/Bacteria_PCOA_Genus_Helsinki.csv')
+
+
+BacteriaHelsinki_DistanceMatrix=vegdist(Bacteria_Helsinki, method="bray", binary=FALSE, diag=FALSE, upper=FALSE, na.rm=FALSE)
+
+Sup_DataHelsinki=read.csv('Desktop/Thesis/R/BetaDiversityAnalysis_073115/PCOA/Second_Helsinki.csv')
+attach(Sup_DataHelsinki)
+
+GroupC=TRT
+
+BacteriaHelsinki_modC=betadisper(BacteriaHelsinki_DistanceMatrix, GroupC, type=c("median"))
+
+anova(BacteriaHelsinki_modC)
+
+permutest(BacteriaHelsinki_modC)
+
+BacteriaHelsinki_modC
+
+####Lahti#####
+#Bacteria_Lahti=read.csv('Desktop/Thesis/R/BetaDiversityAnalysis_073115/PCOA/Bacteria/Bacteria_PCOA_Genus_Lahti.csv')
+Bacteria_Lahti=read.csv('~/Bacteria_PCOA_Genus_Lahti.csv')
+
+
+BacteriaLahti_DistanceMatrix=vegdist(Bacteria_Lahti, method="bray", binary=FALSE, diag=FALSE, upper=FALSE, na.rm=FALSE)
+
+Sup_DataLahti=read.csv('Desktop/Thesis/R/BetaDiversityAnalysis_073115/PCOA/Second_Lahti.csv')
+attach(Sup_DataLahti)
+
+GroupC=TRT
+
+BacteriaLahti_modC=betadisper(BacteriaLahti_DistanceMatrix, GroupC, type=c("median"))
+
+anova(BacteriaLahti_modC)
+
+permutest(BacteriaLahti_modC)
+
+BacteriaLahti_modC
+
+####Budapest####
+#Bacteria_Budapest=read.csv('Desktop/Thesis/R/BetaDiversityAnalysis_073115/PCOA/Bacteria/Bacteria_PCOA_Genus_Budapest.csv')
+Bacteria_Budapest=read.csv('~/Bacteria_PCOA_Genus_Budapest.csv')
+
+
+BacteriaBudapest_DistanceMatrix=vegdist(Bacteria_Budapest, method="bray", binary=FALSE, diag=FALSE, upper=FALSE, na.rm=FALSE)
+
+Sup_DataBudapest=read.csv('Desktop/Thesis/R/BetaDiversityAnalysis_073115/PCOA/Second_Budapest.csv')
+attach(Sup_DataBudapest)
+
+GroupC=TRT
+
+BacteriaBudapest_modC=betadisper(BacteriaBudapest_DistanceMatrix, GroupC, type=c("median"))
+
+anova(BacteriaBudapest_modC)
+
+permutest(BacteriaBudapest_modC)
+
+BacteriaBudapest_modC
+
+####Potchefstroom#####
+
+#Bacteria_Potchefstroom=read.csv('Desktop/Thesis/R/BetaDiversityAnalysis_073115/PCOA/Bacteria/Bacteria_PCOA_Genus_Potchefstroom.csv')
+Bacteria_Potchefstroom=read.csv('~/Bacteria_PCOA_Genus_Potchefstroom.csv')
+
+
+BacteriaPotchefstroom_DistanceMatrix=vegdist(Bacteria_Potchefstroom, method="bray", binary=FALSE, diag=FALSE, upper=FALSE, na.rm=FALSE)
+
+Sup_DataPotchefstroom=read.csv('Desktop/Thesis/R/BetaDiversityAnalysis_073115/PCOA/Second_Potchefstroom.csv')
+attach(Sup_DataPotchefstroom)
+
+GroupC=TRT
+
+BacteriaPotchefstroom_modC=betadisper(BacteriaPotchefstroom_DistanceMatrix, GroupC, type=c("median"))
+
+anova(BacteriaPotchefstroom_modC)
+
+permutest(BacteriaPotchefstroom_modC)
+
+BacteriaPotchefstroom_modC
+
+
+###Fungi:
+
+
+
+#FungilCommunity_Phylum=read.csv('Desktop/Thesis/R/BetaDiversityAnalysis_073115/PCOA/Fungi/Fungal_CommunityData_Phylum_101915.csv')
+FungilCommunity_Phylum=read.csv('~/Fungal_CommunityData_Phylum_101915.csv')
+
+
+FungiPhylum_DistanceMatrix=vegdist(FungilCommunity_Phylum, method="bray", binary=FALSE, diag=FALSE, upper=FALSE, na.rm=FALSE)
+
+Sup_Data=read.csv('Volumes/Seagate/R/BetaDiversityAnalysis_073115/PCOA/SecondMatrix.csv')
+
+attach(Sup_Data)
+GroupA=BLK2
+GroupB=BLK
+GroupC=TRT
+
+FungiPhylum_modA=betadisper(FungiPhylum_DistanceMatrix, GroupA, type=c("median"))
+FungiPhylum_modB=betadisper(FungiPhylum_DistanceMatrix, GroupB, type=c("median"))
+FungiPhylum_modC=betadisper(FungiPhylum_DistanceMatrix, GroupC, type=c("median"))
+
+anova(FungiPhylum_modA)
+anova(FungiPhylum_modB)
+anova(FungiPhylum_modC)
+
+permutest(FungiPhylum_modA)
+permutest(FungiPhylum_modB)
+permutest(FungiPhylum_modC)
+
+FungiPhylum_modA
+FungiPhylum_modB
+FungiPhylum_modC
+
+#####CLASS######
+
+#FungiCommunity_Class=read.csv('Desktop/Thesis/R/BetaDiversityAnalysis_073115/PCOA/Fungi/Fungal_CommunityData_Class_101915.csv')
+FungiCommunity_Class=read.csv(‘~/Fungal_CommunityData_Class_101915.csv')
+
+
+FungiClass_DistanceMatrix=vegdist(FungiCommunity_Class, method="bray", binary=FALSE, diag=FALSE, upper=FALSE, na.rm=FALSE)
+
+FungiClass_modA=betadisper(FungiClass_DistanceMatrix, GroupA, type=c("median"))
+FungiClass_modB=betadisper(FungiClass_DistanceMatrix, GroupB, type=c("median"))
+FungiClass_modC=betadisper(FungiClass_DistanceMatrix, GroupC, type=c("median"))
+
+anova(FungiClass_modA)
+anova(FungiClass_modB)
+anova(FungiClass_modC)
+
+permutest(FungiClass_modA)
+permutest(FungiClass_modB)
+permutest(FungiClass_modC)
+
+FungiClass_modA
+FungiClass_modB
+FungiClass_modC
+
+
+#####ORDER######
+
+
+
+#FungiCommunity_Order=read.csv('Desktop/Thesis/R/BetaDiversityAnalysis_073115/PCOA/Fungi/Fungal_CommunityData_Order_101915.csv')
+FungiCommunity_Order=read.csv('~/Fungal_CommunityData_Order_101915.csv')
+
+FungiOrder_DistanceMatrix=vegdist(FungiCommunity_Order, method="bray", binary=FALSE, diag=FALSE, upper=FALSE, na.rm=FALSE)
+
+FungiOrder_modA=betadisper(FungiOrder_DistanceMatrix, GroupA, type=c("median"))
+FungiOrder_modB=betadisper(FungiOrder_DistanceMatrix, GroupB, type=c("median"))
+FungiOrder_modC=betadisper(FungiOrder_DistanceMatrix, GroupC, type=c("median"))
+
+anova(FungiOrder_modA)
+anova(FungiOrder_modB)
+anova(FungiOrder_modC)
+
+permutest(FungiOrder_modA)
+permutest(FungiOrder_modB)
+permutest(FungiOrder_modC)
+
+FungiOrder_modA
+FungiOrder_modB
+FungiOrder_modC
+
+
+#####FAMILY#####
+
+
+
+
+#FungiCommunity_Family=read.csv('Desktop/Thesis/R/BetaDiversityAnalysis_073115/PCOA/Fungi/Fungal_CommunityData_Family_101915.csv')
+FungiCommunity_Family=read.csv('~/Fungal_CommunityData_Family_101915.csv')
+
+
+FungiFamily_DistanceMatrix=vegdist(FungiCommunity_Family, method="bray", binary=FALSE, diag=FALSE, upper=FALSE, na.rm=FALSE)
+
+FungiFamily_modA=betadisper(FungiFamily_DistanceMatrix, GroupA, type=c("median"))
+FungiFamily_modB=betadisper(FungiFamily_DistanceMatrix, GroupB, type=c("median"))
+FungiFamily_modC=betadisper(FungiFamily_DistanceMatrix, GroupC, type=c("median"))
+
+anova(FungiFamily_modA)
+anova(FungiFamily_modB)
+anova(FungiFamily_modC)
+
+permutest(FungiFamily_modA)
+permutest(FungiFamily_modB)
+permutest(FungiFamily_modC)
+
+FungiFamily_modA
+FungiFamily_modB
+FungiFamily_modC
+
+
+#########GENUS#######
+
+
+
+#FungiCommunity_Genus=read.csv('Desktop/Thesis/R/BetaDiversityAnalysis_073115/PCOA/Fungi/Fungal_CommunitData_Genus_090215.csv')
+FungiCommunity_Genus=read.csv('~/Fungal_CommunitData_Genus_090215.csv')
+
+
+FungiGenus_DistanceMatrix=vegdist(FungiCommunity_Genus, method="bray", binary=FALSE, diag=FALSE, upper=FALSE, na.rm=FALSE)
+
+FungiGenus_modA=betadisper(FungiGenus_DistanceMatrix, GroupA, type=c("median"))
+FungiGenus_modB=betadisper(FungiGenus_DistanceMatrix, GroupB, type=c("median"))
+FungiGenus_modC=betadisper(FungiGenus_DistanceMatrix, GroupC, type=c("median"))
+
+anova(FungiGenus_modA)
+anova(FungiGenus_modB)
+anova(FungiGenus_modC)
+
+permutest(FungiGenus_modA)
+permutest(FungiGenus_modB)
+permutest(FungiGenus_modC)
+
+FungiGenus_modA
+FungiGenus_modB
+FungiGenus_modC
+
+
+
+############Fungi OTU#########
+
+
+#Fungi_OTU=read.csv('Desktop/Thesis/R/BetaDiversityAnalysis_073115/PCOA/Fungi/Fungal_CommunitData_OTU_073115.csv')
+Fungi_OTU=read.csv('~/Fungal_CommunitData_OTU_073115.csv')
+
+
+FungiOTU_DistanceMatrix=vegdist(Fungi_OTU, method="bray", binary=FALSE, diag=FALSE, upper=FALSE, na.rm=FALSE)
+
+FungiOTU_modA=betadisper(FungiOTU_DistanceMatrix, GroupA, type=c("median"))
+FungiOTU_modB=betadisper(FungiOTU_DistanceMatrix, GroupB, type=c("median"))
+FungiOTU_modC=betadisper(FungiOTU_DistanceMatrix, GroupC, type=c("median"))
+
+anova(FungiOTU_modA)
+anova(FungiOTU_modB)
+anova(FungiOTU_modC)
+
+permutest(FungiOTU_modA)
+permutest(FungiOTU_modB)
+permutest(FungiOTU_modC)
+
+FungiOTU_modA
+FungiOTU_modB
+FungiOTU_modC
+
+
+###############BY CITY#################
+#####Baltimore#######
+
+#Fungi_Baltimore=read.csv('Desktop/Thesis/R/BetaDiversityAnalysis_073115/PCOA/Fungi/Fungi_PCOA_OTU_Baltimore.csv')
+Fungi_Baltimore=read.csv('~/Fungi_PCOA_OTU_Baltimore.csv')
+
+
+FungiBaltimore_DistanceMatrix=vegdist(Fungi_Baltimore, method="bray", binary=FALSE, diag=FALSE, upper=FALSE, na.rm=FALSE)
+
+Sup_DataBaltimore=read.csv('Desktop/Thesis/R/BetaDiversityAnalysis_073115/PCOA/Second_Baltimore.csv')
+attach(Sup_DataBaltimore)
+
+GroupC=TRT
+
+FungiBaltimore_modC=betadisper(FungiBaltimore_DistanceMatrix, GroupC, type=c("median"))
+
+anova(FungiBaltimore_modC)
+
+permutest(FungiBaltimore_modC)
+
+FungiBaltimore_modC
+
+
+#####helsinki##########
+#Fungi_Helsinki=read.csv('Desktop/Thesis/R/BetaDiversityAnalysis_073115/PCOA/Fungi/Fungi_PCOA_OTU_Helsinki.csv')
+Fungi_Helsinki=read.csv('~/Fungi_PCOA_OTU_Helsinki.csv')
+
+
+FungiHelsinki_DistanceMatrix=vegdist(Fungi_Helsinki, method="bray", binary=FALSE, diag=FALSE, upper=FALSE, na.rm=FALSE)
+
+Sup_DataHelsinki=read.csv('Desktop/Thesis/R/BetaDiversityAnalysis_073115/PCOA/Second_Helsinki.csv')
+attach(Sup_DataHelsinki)
+
+GroupC=TRT
+
+FungiHelsinki_modC=betadisper(FungiHelsinki_DistanceMatrix, GroupC, type=c("median"))
+
+anova(FungiHelsinki_modC)
+
+permutest(FungiHelsinki_modC)
+
+FungiHelsinki_modC
+
+####Lahti#####
+#Fungi_Lahti=read.csv('Desktop/Thesis/R/BetaDiversityAnalysis_073115/PCOA/Fungi/Fungi_PCOA_OTU_Lahti.csv')
+Fungi_Lahti=read.csv('~/Fungi_PCOA_OTU_Lahti.csv')
+
+FungiLahti_DistanceMatrix=vegdist(Fungi_Lahti, method="bray", binary=FALSE, diag=FALSE, upper=FALSE, na.rm=FALSE)
+
+Sup_DataLahti=read.csv('Desktop/Thesis/R/BetaDiversityAnalysis_073115/PCOA/Second_Lahti.csv')
+attach(Sup_DataLahti)
+
+GroupC=TRT
+
+FungiLahti_modC=betadisper(FungiLahti_DistanceMatrix, GroupC, type=c("median"))
+
+anova(FungiLahti_modC)
+
+permutest(FungiLahti_modC)
+
+FungiLahti_modC
+
+####Budapest####
+#Fungi_Budapest=read.csv('Desktop/Thesis/R/BetaDiversityAnalysis_073115/PCOA/Fungi/Fungi_PCOA_OTU_Budapest.csv')
+Fungi_Budapest=read.csv('~/Fungi_PCOA_OTU_Budapest.csv')
+
+
+FungiBudapest_DistanceMatrix=vegdist(Fungi_Budapest, method="bray", binary=FALSE, diag=FALSE, upper=FALSE, na.rm=FALSE)
+
+Sup_DataBudapest=read.csv('Desktop/Thesis/R/BetaDiversityAnalysis_073115/PCOA/Second_Budapest.csv')
+attach(Sup_DataBudapest)
+
+GroupC=TRT
+
+FungiBudapest_modC=betadisper(FungiBudapest_DistanceMatrix, GroupC, type=c("median"))
+
+anova(FungiBudapest_modC)
+
+permutest(FungiBudapest_modC)
+
+FungiBudapest_modC
+
+####Potchefstroom#####
+
+#Fungi_Potchefstroom=read.csv('Desktop/Thesis/R/BetaDiversityAnalysis_073115/PCOA/Fungi/Fungi_PCOA_OTU_Potchefstroom.csv')
+Fungi_Potchefstroom=read.csv('~/Fungi_PCOA_OTU_Potchefstroom.csv')
+
+FungiPotchefstroom_DistanceMatrix=vegdist(Fungi_Potchefstroom, method="bray", binary=FALSE, diag=FALSE, upper=FALSE, na.rm=FALSE)
+
+Sup_DataPotchefstroom=read.csv('Desktop/Thesis/R/BetaDiversityAnalysis_073115/PCOA/Second_Potchefstroom.csv')
+attach(Sup_DataPotchefstroom)
+
+GroupC=TRT
+
+FungiPotchefstroom_modC=betadisper(FungiPotchefstroom_DistanceMatrix, GroupC, type=c("median"))
+
+anova(FungiPotchefstroom_modC)
+permutest(FungiPotchefstroom_modC)
+FungiPotchefstroom_modC
+
+
+
+
+
+## ECM data
+
+### import data, format for testing###
+a=read.csv('~/Desktop/Thesis/R/Bacterial_Rarefaction/all_richness.csv')
+a=read.csv('~/all_richness.csv')
+
+
+bac.landuse=a$landuse
+bac.city=a$city
+bacRich=a$BacRichness.OTU
+ArcRich=a$ArchRichness.OTU
+
+y<-data.frame(bac.landuse, bac.city, bacRich, ArcRich)
+
+funRich<-a$FungRichness.OTU
+ECMRich<-a$ECMRichness.otu
+
+FunData<-data.frame(bac.landuse, bac.city, funRich, ECMRich)
+
+FunData<-FunData[-c(24,27,29,33,47,48,64,74,91,95),]
+
+fun.Rich<-FunData$funRich
+fun.landuse<-FunData$bac.landuse
+
+### do test#####
+
+library(lawstat)
+library(vegan)
+
+bactest<-aov(bacRich~bac.landuse+bac.city+bac.landuse*bac.city, y)
+summary(bactest)
+baclev<-levene.test(bacRich, bac.landuse)
+
+arctest<-aov(ArcRich~bac.landuse+bac.city+bac.landuse*bac.city, y)
+summary(arctest)
+arclev<-levene.test(ArcRich, bac.landuse)
+
+
+funtest<-aov(funRich~bac.landuse+bac.city+bac.landuse*bac.city, FunData)
+summary(funtest)
+
+fun.landuse<-FunData$bac.landuse
+funlev<-levene.test(fun.Rich, fun.landuse)
+funlev
