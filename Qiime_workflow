@@ -1,0 +1,47 @@
+## Bacteria
+
+fastq-join -m 50 -r ~/Sample1_Joinreport ~/Illumina/L001_R1_001.fastq.gz ~/Illumina/L001_R2_001.fastq.gz -o ~/Sample1_Unpaired_R1 -o ~/Sample1_Unpaired_R2 -o ~/Sample1_Joined; etc.
+
+convert_fastaqual_fastq.py -c fastq_to_fastaqual -f ~/Sample1_Joined -o ~/Fastaqual_output/ ; etc.
+
+split_libraries.py -m ~/MappingFile_Sample1.txt -f ~/Sample1_Joined.fna -q ~/Sample1_Joined.qual -b 0 -z truncate_remove -o  ~/split_library_1; etc.
+
+cat ~/split_library_1/seqs.fna ~/split_library_2/seqs.fna etc. > ~/Combined_sequence_libraries_(date).fna
+
+pick_otus.py -i ~/Combined_sequence_libraries_(date).fna -o ~/Pick_OTU_(Date)/
+
+pick_rep_set.py -i ~/Combined_sequence_libraries_(date)_otus.txt -f ~/Combined_sequence_libraries_(date).fna -o ~/Combined_sequence_libraries_(date)_repset.fna
+
+assign_taxonomy.py -i ~/Combined_sequence_libraries_(date)_repset.fna -o ~/taxonomy_results/
+
+make_otu_table.py -i ~/Combined_sequence_libraries_(date)_otus.txt -t ~/Combined_sequence_libraries_(date)_repset_tax_assignments.txt -o ~/Combined_sequence_libraries_(date)_OTU_table.biom
+
+biom convert -i ~/Combined_sequence_libraries_(date)_OTU_table.biom -o ~/OTU_Table_(date).txt -b --header-key=”taxonomy” --output-metadata-id=”consensus_lineage”
+
+summarize_taxa.py -i ~/Combined_sequence_libraries_(date)_OTU_table.biom -o ~/taxonomy_summaries/
+
+## Fungi
+
+
+fastq-join:
+fastq-join -m 50 -r ~/Sample1_Joinreport ~/L001_R1_001.fastq.gz ~/L001_R2_001.fastq.gz -o ~/Sample1_R1_Unpaired -o ~/Sample1_R2_Unpaired -o ~/Joined/Sample1_Joined; etc.
+
+convert_fastaqual_fastq.py -c fastq_to_fastaqual -f ~/Sample1_Joined -o ~/Fastaqual_output/ ; etc.
+
+# increased the homopolymer repeat region allowable from 6 to 8, which includes at majority of rejected samples which are real organisms (yeasty beasties).
+split_libraries.py -H 8 -m ~/MappingFile_Sample1.txt -f ~/Sample1_Joined.fna -q ~/Sample1_Joined.qual -b 0 -z truncate_remove -o ~/split_library_1; etc.
+
+cat ~/split_library_1/seqs.fna ~/split_library_2/seqs.fna ... etc. > ~/Combined_sequence_libraries_(date).fna
+
+pick_otus.py -i ~/Combined_sequence_libraries_(date).fna -o ~/Pick_OTU_(date)/
+
+pick_rep_set.py -i ~/Combined_sequence_libraries_(date)_otus.txt -f ~/Combined_sequence_libraries_(date).fna -o ~/Combined_sequence_libraries_(date)_repset.fna
+
+# assigne taxonomy using rdp classifier.
+assign_taxonomy.py -i ~/Combined_sequence_libraries_(date)_repset.fna -t ~/sh_qiime_release_10/sh_taxonomy_qiime_ver6_dynamic_10.09.2014.txt -r ~/sh_qiime_release_10/sh_refs_qiime_ver6_dynamic_10.09.2014.fasta -o ~/taxonomy_results/ -m rdp --rdp_max_memory 10000
+
+
+make_otu_table.py -i ~/Combined_sequence_libraries_050115_otus.txt -t ~/Combined_sequence_libraries_050115_repset_tax_assignments.txt -o ~/combined_seqs_otu_table_050115.biom
+
+summarize_taxa.py -i ~/combined_seqs_otu_table_(date).biom -o ~/taxonomy_summaries/
+
