@@ -1,0 +1,19 @@
+## anova tests for significant differences among QPCR Gene Quantities
+
+
+library(vegan)
+
+#qpcr.data=read.csv('Desktop/Thesis/R/QPCR/QPCR_Data_100615.csv')
+qpcr.data=read.csv('~/QPCR_Data_100615.csv')
+
+attach(qpcr.data)
+
+ITS.TRT=aov(its ~ TRT + CITY, data=qpcr.data)
+summary(ITS.TRT)
+X16s.TRT=aov(X16s ~ TRT+ CITY, data=qpcr.data)
+summary(X16s.TRT)
+Post-hoc Tukey HSD
+
+TukeyHSD(ITS.TRT, ordered=FALSE, conf.level=0.95)
+TukeyHSD(F_Symbiotroph.TRT, ordered=FALSE, conf.level=0.95)
+
