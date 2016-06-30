@@ -1,0 +1,21 @@
+##Environmental correlation to archaea, bacteria and fungi
+
+archaeacmatrix1=read.csv('Desktop/Thesis/R/MainMatrix/Archaea_Genus_Main.csv')
+ArchOrd1=metaMDS(archaeacmatrix1)
+
+Bacteriamatrix1=read.csv('Desktop/Thesis/R/MainMatrix/Bacteria_Genus_Main.csv')
+BacOrd1=metaMDS(Bacteriamatrix1)
+
+
+Fungimatrix1=read.csv('Desktop/Thesis/R/MainMatrix/Fungi_OTU_Main.csv')
+FunOrd1=metaMDS(Fungimatrix1)
+
+Data.env=read.csv('Desktop/Thesis/R/MainMatrix/Second.csv')
+ArchFit=envfit(ArchOrd1, Data.env)
+ArchFit
+
+BacFit=envfit(BacOrd1, Data.env)
+BacFit
+
+FunFit=envfit(FunOrd1, Data.env)
+FunFit
