@@ -1,0 +1,15 @@
+##Rarefaction:
+
+total16s=read.tcsv('~/total16s.csv')
+x=rrarefy(total16s, 70000)
+write.csv(x, filepath.csv)
+
+
+Bacteria=read.tcsv('~Bacteria_OTU.csv')
+x=rrarefy(Bacteria, 70000)
+write.csv(x, filepath.csv)
+
+
+Fungi=read.csv('~Fungi_otu.csv')
+x=rrarefy(total16s, 20000)
+write.csv(x, filepath.csv)
